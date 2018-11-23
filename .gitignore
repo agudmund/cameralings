@@ -1,3 +1,10 @@
 10 Things.txt
 images
 *.pyc
+*.meta
+*.csproj
+*.sln
+Unity/.vs
+Unity/Library
+Unity/ProjectSettings
+Unity/UnityPackageManager
