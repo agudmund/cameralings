@@ -29,6 +29,11 @@ class Capture:
 
 	def initCam(self):
 		video = cv2.VideoCapture()
+		
+		# Default the camera to 1080p, it falls back on the max resolution supported.
+		video.set(3,1920.0)
+		video.set(4,1080.0)
+		
 		video.open(0)
 
 		return video
