@@ -25,6 +25,7 @@ class Capture:
 				exec('self.%s = %s' % ( attribute, value ) )
 			else:
 				exec('self.%s = "%s"' % ( attribute, value ) )
+		self.tmpfile = os.path.join(os.getenv("TMP"),self.tmpfile)
 
 	def initCam(self):
 		video = cv2.VideoCapture()
@@ -34,8 +35,9 @@ class Capture:
 
 	def checkIt(self):
 		'''Read the status and default to On in case of failure'''
-		with open('ldrstatus.tmp' ) as data:
+		with open(self.tmpfile ) as data:
 			rez = data.readlines()
+
 		try:
 			token = rez[0]
 		except IndexError as e:

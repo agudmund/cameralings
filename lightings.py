@@ -1,6 +1,7 @@
 #!/usr/bin/env python
 # *-* coding:utf-8 *-*
 
+import os
 import serial
 import time
 import argparse
@@ -27,13 +28,13 @@ class Connect:
 				exec('self.%s = %s' % ( attribute, value ) )
 			else:
 				exec('self.%s = "%s"' % ( attribute, value ) )
+		self.tmpfile = os.path.join(os.getenv("TMP"),self.tmpfile)
 
 	def markIt( self, token ):
 		"""Logs activity into a file for other daemons to read"""
-
 		with open( self.tmpfile ,'w') as data:
 			data.write( token )
-		
+
 		return True
 
 	def scratchIt(self,text):
