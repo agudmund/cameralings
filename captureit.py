@@ -15,7 +15,6 @@ class Capture:
 		self.readSettings()
 		self.cam = self.initCam()
 
-
 	def readSettings(self):
 		with open("settings") as data:
 			rez = data.readlines()
@@ -75,7 +74,6 @@ class Capture:
 					self.active = False
 				
 			sleep(1)
-
 
 if __name__ == '__main__':
 	c = Capture()
