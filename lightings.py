@@ -17,6 +17,7 @@ class Connect:
 		self.serial = serial.Serial( port )
 		self.tmpfile = ''
 		self.readSettings()
+		self.logstart = time.time()
 	
 	def readSettings(self):
 		with open("settings") as data:
@@ -56,9 +57,19 @@ class Connect:
 			toString = reading.decode()
 			print(toString.rstrip('\n'))
 
+	def logDaylight(self, stamp):
+		'''Logs the default light value for the time of day on 60 second intervals'''
+
+		if time.time() - self.logstart>60:
+			self.logstart = time.time()
+			with open(self.logfile,'a') as data:
+				data.write('%s %s\n'%(time.time(),stamp))
+
+
 	def loop(self):
 		while True:
 			reading = self.serial.readline()
+			self.logDaylight(reading.decode().replace('\n','').replace('\r',''))
 			if int(reading)>200:
 				if not self.active:
 					self.scratchIt('Light On')

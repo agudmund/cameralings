@@ -1,3 +1,4 @@
 framerate 24
 tmpfile ldrstatus.tmp
 imageroot images
+logfile timestamps.txt
