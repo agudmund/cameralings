@@ -1,0 +1,37 @@
+<div id="Ticker" class="ticker"></div>
+<script src="/static/thingling.js">
+	
+</script>
+
+<script type="text/javascript">
+function load_js()
+   {
+      var head= document.getElementsByTagName('head')[0];
+      var script= document.createElement('script');
+      script.src= '/static/thingling.js';
+      head.appendChild(script);
+      setTimeout(load_js, 100);
+   }
+load_js();
+
+something();
+</script>
+
+<style type="text/css">
+	body {
+    background: black;
+}
+
+.ticker {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translateX(-50%) translateY(-50%);
+    color: #17D4FE;
+    font-size: 60px;
+    font-family: Orbitron;
+    letter-spacing: 7px;
+
+
+}
+</style>
