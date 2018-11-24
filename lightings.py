@@ -5,6 +5,7 @@ import os
 import serial
 import time
 import argparse
+import geocoder
 
 parser = argparse.ArgumentParser(description='LDR Sensor')
 parser.add_argument('-d','--debug', help='Debug',action="store_true")
@@ -16,6 +17,7 @@ class Connect:
 		self.active = False
 		self.serial = serial.Serial( port )
 		self.tmpfile = ''
+		self.location = geocoder.ip("me").latlng
 		self.readSettings()
 		self.logstart = time.time()
 	
@@ -63,7 +65,7 @@ class Connect:
 		if time.time() - self.logstart>60:
 			self.logstart = time.time()
 			with open(self.logfile,'a') as data:
-				data.write('%s %s\n'%(time.time(),stamp))
+				data.write('%s %s %s %s\n'%(self.location[0], self.location[1], time.time(),stamp))
 
 
 	def loop(self):
